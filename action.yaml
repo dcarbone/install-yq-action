@@ -45,8 +45,8 @@ runs:
       if: (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check.outputs.found == 'false' || inputs.force == 'true')
       shell: bash
       run: |
-        echo '::group::Creating temp dir ${{ runner.temp }}/gotpl'
-        _dir='${{ runner.temp }}/gotpl'
+        echo '::group::Creating temp dir ${{ runner.temp }}/yq'
+        _dir='${{ runner.temp }}/yq'
         mkdir -p "${_dir}"
         echo "yq-bin-dir=${_dir}" >> $GITHUB_OUTPUT
         echo '::endgroup::'

@@ -1,4 +1,4 @@
-name: Setup YQ
+name: Install YQ
 description: |
   Installs a version of YQ into the job tool cache using simple shell scripts
 

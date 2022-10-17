@@ -26,7 +26,7 @@ outputs:
     value: "${{ steps.yq-check-unix.outputs.found == 'true' }}"
   installed:
     description: "If 'true', yq was installed by this action"
-    value: "${{ inputs.force == 'true' || steps.yq-check-unix.outputs.found == 'false')"
+    value: "${{ inputs.force == 'true' || steps.yq-check-unix.outputs.found == 'false' }}"
 
 runs:
   using: composite

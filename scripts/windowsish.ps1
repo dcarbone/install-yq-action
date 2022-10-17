@@ -55,6 +55,6 @@ if ($Env:DL_COMPRESSED -eq "true")
 }
 
 Write-Host "::group::Copying to temporary dir"
-Move-Item -Force -LiteralPath "$Env:RUNNER_TEMP\${_dir_name}\${_bin_name}" -Destination "$Env:YQ_BIN_DIR\yq"
+Move-Item -Force -LiteralPath "$Env:RUNNER_TEMP\${_dir_name}\${_bin_name}" -Destination "$Env:YQ_BIN_DIR\yq.exe"
 Remove-Item -Force -Recurse -Path "$Env:RUNNER_TEMP\${_dir_name}"
 Write-Host "::endgroup::"

@@ -59,10 +59,10 @@ if [[ $DL_COMPRESSED == 'true' ]]; then
   _dl_path="$RUNNER_TEMP/${_dl_name}"
 else
   _dl_name="${_bin_name}"
-  _dl_path="$RUNNER_TEMP/${_dl_name}/${_dl_name}"
+  _dl_path="$RUNNER_TEMP/${_bin_name}/${_dl_name}"
+  mkdir -p "$RUNNER_TEMP/${_bin_name}"
 fi
 
-mkdir -p "${_dl_path}"
 
 _dl_url="${_base_url}/$YQ_VERSION/${_dl_name}"
 

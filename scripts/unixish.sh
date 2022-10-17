@@ -69,10 +69,13 @@ echo '::endgroup::'
 
 if [[ $DL_COMPRESSED == 'true' ]]; then
   echo '::group::Expanding archive'
-  tar -xzvf "${_dl_path}" -C "$RUNNER_TEMP"
+  tar -xzv -C "$RUNNER_TEMP" -f "${_dl_path}"
   rm -rf "${_dl_path}"
   echo '::endgroup::'
 fi
+
+ls -lsa
+ls -lsa "$RUNNER_TEMP"
 
 echo '::group::Moving to install dir'
 mv "$RUNNER_TEMP/${_bin_name}/${_bin_name}" "$YQ_BIN_DIR/yq"

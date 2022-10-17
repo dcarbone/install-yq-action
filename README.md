@@ -1,7 +1,7 @@
-# setup-yq-action
+# install-yq-action
 Install YQ into the action tool without needing nodejs
 
-[![Tests - Setup YQ Action](https://github.com/dcarbone/setup-yq-action/actions/workflows/tests.yaml/badge.svg)](https://github.com/dcarbone/setup-yq-action/actions/workflows/tests.yaml)
+[![Tests - Setup YQ Action](https://github.com/dcarbone/install-yq-action/actions/workflows/tests.yaml/badge.svg)](https://github.com/dcarbone/install-yq-action/actions/workflows/tests.yaml)
 
 # Index
 

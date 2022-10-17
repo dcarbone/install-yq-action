@@ -42,8 +42,8 @@ jobs:
       - uses: actions/checkout@v3.1.0
 
       - name: Setup yq
-        id: setup-yq
-        uses: dcarbone/setup-yq-action@main
+        id: install-yq
+        uses: dcarbone/install-yq-action@main
         with:
           force: '${{ matrix.force }}'
           download-compressed: '${{ matrix.download-compressed }}'
@@ -58,31 +58,31 @@ jobs:
         if: runner.os == 'Linux' || runner.os == 'macOS'
         shell: bash -e {0}
         run: |
-          _installed='${{ steps.setup-yq.outputs.installed }}'
+          _installed='${{ steps.install-yq.outputs.installed }}'
           _err=
           if [[ '${{ matrix.force }}' == 'true' ]]; then
             # enabling "force" must result in an install
-            if [[ '${{ steps.setup-yq.outputs.installed }}' != 'true' ]]; then
+            if [[ '${{ steps.install-yq.outputs.installed }}' != 'true' ]]; then
               echo 'Unexpected value for "installed":'
               echo 'Expected:   "true"'
-              echo 'Actual:     "${{ steps.setup-yq.outputs.installed }}"'
+              echo 'Actual:     "${{ steps.install-yq.outputs.installed }}"'
               _err=1
             fi
           else
-            if [[ '${{ steps.setup-yq.outputs.found }}' == 'true' ]]; then
+            if [[ '${{ steps.install-yq.outputs.found }}' == 'true' ]]; then
               # if found, must not be installed without force
-              if [[ '${{ steps.setup-yq.outputs.installed }}' != 'false' ]]; then
+              if [[ '${{ steps.install-yq.outputs.installed }}' != 'false' ]]; then
                 echo 'Unexpected value for "installed":'
                 echo 'Expected:   "false"'
-                echo 'Actual:     "${{ steps.setup-yq.outputs.installed }}"'
+                echo 'Actual:     "${{ steps.install-yq.outputs.installed }}"'
                 _err=1
               fi
             else
               # if not found, must be installed
-              if [[ '${{ steps.setup-yq.outputs.installed }}' != 'true' ]]; then
+              if [[ '${{ steps.install-yq.outputs.installed }}' != 'true' ]]; then
                 echo 'Unexpected value for "installed":'
                 echo 'Expected:   "true"'
-                echo 'Actual:     "${{ steps.setup-yq.outputs.installed }}"'
+                echo 'Actual:     "${{ steps.install-yq.outputs.installed }}"'
                 _err=1
               fi
             fi
@@ -102,39 +102,39 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           Set-StrictMode -Version Latest
-          $_installed='${{ steps.setup-yq.outputs.installed }}'
+          $_installed='${{ steps.install-yq.outputs.installed }}'
           $_err = 0
           if ("${{ matrix.force }}" -eq "true")
           {
               # enabling "force" must result in an install
-              if ("${{ steps.setup-yq.outputs.installed }}" -ne "true")
+              if ("${{ steps.install-yq.outputs.installed }}" -ne "true")
               {
                   Write-Host "Unexpected value for installed"
                   Write-Host "Expected:   true"
-                  Write-Host "Actual:     ${{ steps.setup-yq.outputs.installed }}"
+                  Write-Host "Actual:     ${{ steps.install-yq.outputs.installed }}"
                   $_err=1
               }
           }
           else
           {
-              if ("${{ steps.setup-yq.outputs.found }}" -eq "true")
+              if ("${{ steps.install-yq.outputs.found }}" -eq "true")
               {
                   # if found, must not be installed without force
-                  if ("${{ steps.setup-yq.outputs.installed }}" -ne "false")
+                  if ("${{ steps.install-yq.outputs.installed }}" -ne "false")
                   {
                       Write-Host "Unexpected value for installed"
                       Write-Host "Expected:  false"
-                      Write-Host "Actual:    ${{ steps.setup-yq.outputs.installed }}"
+                      Write-Host "Actual:    ${{ steps.install-yq.outputs.installed }}"
                       $_err=1
                   }
               }
               else
               {
                   # if not found, must be installed
-                  if ("${{ steps.setup-yq.outputs.installed }}" -ne "true") {
+                  if ("${{ steps.install-yq.outputs.installed }}" -ne "true") {
                       Write-Host "Unexpected value for installed"
                       Write-Host "Expected:  true"
-                      Write-Host "Actual:    ${{ steps.setup-yq.outputs.installed }}"
+                      Write-Host "Actual:    ${{ steps.install-yq.outputs.installed }}"
                       $_err=1
                   }
               }

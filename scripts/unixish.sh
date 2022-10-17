@@ -77,6 +77,7 @@ fi
 
 ls -lsa
 ls -lsa "$RUNNER_TEMP"
+ls -lsa "$RUNNER_TEMP/${_bin_name}"
 
 echo '::group::Moving to install dir'
 mv "$RUNNER_TEMP/${_bin_name}/${_bin_name}" "$YQ_BIN_DIR/yq"

@@ -43,7 +43,7 @@ jobs:
 
       - name: Setup yq
         id: install-yq
-        uses: dcarbone/install-yq-action@main
+        uses: dcarbone/install-yq@main
         with:
           force: '${{ matrix.force }}'
           download-compressed: '${{ matrix.download-compressed }}'

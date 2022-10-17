@@ -48,7 +48,8 @@ jobs:
           force: '${{ matrix.force }}'
           download-compressed: '${{ matrix.download-compressed }}'
 
-      - name: Check yq
+      - name: Check yq - Unix-ish
+        if: runner.os == 'Linux' || runner.os == 'macOS'
         run: |
           which yq
           yq --version
@@ -84,6 +85,13 @@ jobs:
             fi
           fi
           if [ -n "${_err}" ]; then exit 1; fi;
+
+
+      - name: Check yq - Unix-ish
+        if: runner.os == 'Windows'
+        run: |
+          Write-Host (Get-Command "yq.exe")
+          yq.exe --version
 
       - name: Check Outputs - Windows-ish
         if: runner.os == 'Windows'

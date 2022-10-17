@@ -33,7 +33,7 @@ runs:
       if: inputs.force != 'true'
       shell: bash +e {0}
       run: |
-         _yq_bin="$(which yq)"
+        _yq_bin="$(which yq)"
         if [ -f "${_yq_bin}" ]; then
           echo "found=true" >> $GITHUB_OUTPUT
         else

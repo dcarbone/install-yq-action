@@ -87,11 +87,11 @@ jobs:
           if [ -n "${_err}" ]; then exit 1; fi;
 
 
-      - name: Check yq - Unix-ish
+      - name: Check yq - Windows-ish
         if: runner.os == 'Windows'
         run: |
-          Write-Host (Get-Command "yq.exe")
-          yq.exe --version
+          Write-Host (Get-Command "yq")
+          yq --version
 
       - name: Check Outputs - Windows-ish
         if: runner.os == 'Windows'

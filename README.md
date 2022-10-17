@@ -7,9 +7,15 @@ Currently this action only supports Linux and MacOS.
 
 # Index
 
-1. [Action Source](action.yaml)
-2. [Action Inputs](#action-inputs)
-3. [Action Outputs](#action-outputs)
+1. [Examples](#examples)
+2. [Action Source](action.yaml)
+3. [Action Inputs](#action-inputs)
+4. [Action Outputs](#action-outputs)
+
+## Examples
+
+* [linux](./.github/workflows/example-linux.yaml)
+* [macos](./.github/workflows/example-macos.yaml)
 
 ## Action Inputs
 

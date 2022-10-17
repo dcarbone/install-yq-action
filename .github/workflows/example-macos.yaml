@@ -1,0 +1,34 @@
+name: "Setup YQ Example - MacOS"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: false
+        description: "Version of YQ to install"
+        default: "v4.28.1"
+      download-compressed:
+        type: boolean
+        required: false
+        description: "Download .tar.gz of binary rather than raw binary.  Save the tubes."
+        default: true
+      force:
+        type: boolean
+        required: false
+        description: "Do not check for existing yq installation before continuing."
+        default: false
+
+jobs:
+  example:
+    runs-on: macos-latest
+    steps:
+      - name: 'Setup yq'
+        uses: dcarbone/setup-yq-action@main
+        with:
+          force: 'true'
+
+      - name: 'Check yq'
+        run: |
+          which yq
+          yq --version

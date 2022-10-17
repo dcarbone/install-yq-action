@@ -21,11 +21,14 @@ jobs:
       matrix:
         image:
           - "ubuntu-latest"
-          - "macos-latest"
           - "ubuntu-20.04"
           - "ubuntu-22.04"
+          - "macos-latest"
           - "macos-11"
           - "macos-12"
+          - "windows-latest"
+          - "windows-2022"
+          - "windows-2019"
         download-compressed:
           - 'true'
           - 'false'
@@ -49,7 +52,9 @@ jobs:
           which yq
           yq --version
 
-      - name: Check Outputs
+      - name: Check Outputs - Unix-ish
+        if: runner.os == 'Linux' || runner.os == 'macOS'
+        shell: bash -e {0}
         run: |
           _installed='${{ steps.setup-yq.outputs.installed }}'
           _err=
@@ -78,3 +83,9 @@ jobs:
             fi
           fi
           if [ -n "${_err}" ]; then exit 1; fi;
+
+      - name: Check Outputs - Windows-ish
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          Write-Host "do something"

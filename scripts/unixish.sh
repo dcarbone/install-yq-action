@@ -44,13 +44,11 @@ case $RUNNER_ARCH in
     ;;
 
   *)
-    echo "Cannot handle Arch of type $RUNNER_ARCH"
+    echo "Cannot handle arch of type $RUNNER_ARCH"
     echo "Expected one of: [ X86 X64 ARM ARM64 ]"
     exit 1
     ;;
 esac
-
-# https://github.com/mikefarah/yq/releases/download/v4.28.1/yq_darwin_amd64
 
 _bin_name="yq_${_os}_${_arch}"
 
@@ -62,7 +60,6 @@ else
   _dl_path="$RUNNER_TEMP/${_bin_name}/${_dl_name}"
   mkdir -p "$RUNNER_TEMP/${_bin_name}"
 fi
-
 
 _dl_url="${_base_url}/$YQ_VERSION/${_dl_name}"
 
@@ -82,6 +79,7 @@ if [[ $DL_COMPRESSED == 'true' ]]; then
   echo '::endgroup::'
 fi
 
+echo '::group::Copying to temporary dir'
 mv "$RUNNER_TEMP/${_bin_name}/${_bin_name}" "$YQ_BIN_DIR/yq"
 rm -rf "$RUNNER_TEMP/${_bin_name}"
 echo '::endgroup::'

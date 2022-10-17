@@ -14,6 +14,7 @@ Cross-platform [yq](https://github.com/mikefarah/yq) installer composite action
 
 * [linux](./.github/workflows/example-linux.yaml)
 * [macos](./.github/workflows/example-macos.yaml)
+* [windows](./.github/workflows/example-windows.yaml)
 
 ## Action Inputs
 

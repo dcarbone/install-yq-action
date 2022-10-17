@@ -23,7 +23,7 @@ inputs:
 outputs:
   found:
     description: "If 'true', yq was already found on this runner"
-    value: "${{ steps.yq-check-unix.outputs.found == 'true' || steps.yq-check-windows.outputs.found == 'false' }}"
+    value: "${{ steps.yq-check-unix.outputs.found == 'true' || steps.yq-check-windows.outputs.found == 'true' }}"
   installed:
     description: "If 'true', yq was installed by this action"
     value: "${{ inputs.force == 'true' || steps.yq-check-unix.outputs.found == 'false' || steps.yq-check-windows.outputs.found == 'false' }}"

@@ -21,16 +21,19 @@ inputs:
     default: 'false'
 
 outputs:
-  version:
-    description: "Version of YQ installed"
-    value: '${{ inputs.version }}'
+  found:
+    description: "If 'true', yq was already found on this runner"
+    value: "${{ steps.yq-check-unix.outputs.found == 'true' }}"
+  installed:
+    description: "If 'true', yq was installed by this action"
+    value: "${{ inputs.force == 'true' || steps.yq-check-unix.outputs.found == 'false')"
 
 runs:
   using: composite
   steps:
-    - name: Check for yq
-      id: yq-check
-      if: inputs.force != 'true'
+    - name: 'Check for yq - Unix-ish'
+      id: yq-check-unix
+      if: (runner.os == 'Linux' || runner.os == 'macOS')
       shell: bash +e {0}
       run: |
         _yq_bin="$(which yq)"
@@ -42,7 +45,7 @@ runs:
 
     - name: 'Prep - Unix-ish'
       id: prep-unix
-      if: (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check.outputs.found == 'false' || inputs.force == 'true')
+      if: (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check-unix.outputs.found == 'false' || inputs.force == 'true')
       shell: bash
       run: |
         echo '::group::Creating temp dir ${{ runner.temp }}/yq'
@@ -52,7 +55,7 @@ runs:
         echo '::endgroup::'
 
     - name: 'Install yq - Unix-ish'
-      if: (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check.outputs.found == 'false' || inputs.force == 'true')
+      if: (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check-unix.outputs.found == 'false' || inputs.force == 'true')
       shell: bash
       env:
         DL_COMPRESSED: "${{ inputs.download-compressed == 'true' }}"
@@ -61,13 +64,13 @@ runs:
       run: $GITHUB_ACTION_PATH/scripts/unixish.sh
 
     - name: Install into tool cache
-      if: success() && (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check.outputs.found == 'false' || inputs.force == 'true')
+      if: success() && (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check-unix.outputs.found == 'false' || inputs.force == 'true')
       uses: AnimMouse/tool-cache@v1.0.5
       with:
         folder_name: yq
 
 #    - name: 'Install yq - Windows-ish'
-#      if: runner.os == 'Windows' && (steps.yq-check.outputs.found == 'false' || inputs.force == 'true')
+#      if: runner.os == 'Windows' && (steps.yq-check-unix.outputs.found == 'false' || inputs.force == 'true')
 #      shell: powershell
 #      env:
 #        YQ_VERSION: '${{ inputs.yq-version }}'

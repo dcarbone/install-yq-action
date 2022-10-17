@@ -28,6 +28,7 @@ jobs:
       - uses: actions/checkout@v3.1.0
 
       - name: Setup yq
+        id: setup-yq
         uses: dcarbone/setup-yq-action@main
         with:
           force: '${{ matrix.force }}'
@@ -37,3 +38,33 @@ jobs:
         run: |
           which yq
           yq --version
+
+      - name: Check Outputs
+        run: |
+          _installed='${{ steps.setup-yq.outputs.installed }}'
+          _err=
+          if [[ '${{ matrix.force }}' == 'true' ]]; then
+            if [[ '${{ steps.setup-yq.outputs.installed }}' != 'true' ]]; then
+              echo 'Unexpected value for "installed":'
+              echo 'Expected:   "true"'
+              echo 'Actual:     "${{ steps.setup-yq.outputs.installed }}"'
+              _err=1
+            fi
+          else
+            if [[ '${{ steps.setup-yq.outputs.found' == 'true' ]]; then
+              if [[ '${{ steps.setup-yq.outputs.installed }}' != 'false' ]]; then
+                echo 'Unexpected value for "installed":'
+                echo 'Expected:   "false"'
+                echo 'Actual:     "${{ steps.setup-yq.outputs.installed }}"'
+                _err=1
+              fi
+            else
+              if [[ '${{ steps.setup-yq.outputs.installed }}' != 'true' ]]; then
+                echo 'Unexpected value for "installed":'
+                echo 'Expected:   "true"'
+                echo 'Actual:     "${{ steps.setup-yq.outputs.installed }}"'
+                _err=1
+              fi
+            fi
+          fi
+          if [ -z "${_err}" ]; then exit 1; fi;

@@ -56,11 +56,12 @@ _bin_name="yq_${_os}_${_arch}"
 
 if [[ $DL_COMPRESSED == 'true' ]]; then
   _dl_name="${_bin_name}.tar.gz"
+  _dl_path="$RUNNER_TEMP/${_dl_name}"
 else
   _dl_name="${_bin_name}"
+  _dl_path="$RUNNER_TEMP"
 fi
 
-_dl_path="$RUNNER_TEMP/${_dl_name}"
 _dl_url="${_base_url}/$YQ_VERSION/${_dl_name}"
 
 wget -O- "${_dl_url}" > "${_dl_path}"

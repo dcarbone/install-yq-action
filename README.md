@@ -1,5 +1,5 @@
 # install-yq-action
-Install YQ into the action tool without needing nodejs
+Cross-platform [yq](https://github.com/mikefarah/yq) installer composite action
 
 [![Tests - Setup YQ Action](https://github.com/dcarbone/install-yq-action/actions/workflows/tests.yaml/badge.svg)](https://github.com/dcarbone/install-yq-action/actions/workflows/tests.yaml)
 

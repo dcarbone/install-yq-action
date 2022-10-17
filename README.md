@@ -34,7 +34,7 @@ This must be a version with a [corresponding release](https://github.com/mikefar
   download-compressed:
     required: false
     description: "If 'true', downloads .tar.gz of binary rather than raw binary.  Save the tubes."
-    default: "true"
+    default: 'true'
 ```
 
 #### force

@@ -78,7 +78,7 @@ runs:
         }
 
     - name: 'Prep - Windows-ish'
-      id: prep-unix
+      id: prep-windows
       if: runner.os == 'Windows' && (steps.yq-check-windows.outputs.found == 'false' || inputs.force == 'true')
       shell: powershell
       run: |

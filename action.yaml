@@ -77,28 +77,10 @@ runs:
             Add-Content $Env:GITHUB_OUTPUT "found=false"
         }
 
-    - name: 'Prep - Windows-ish'
-      id: prep-windows
-      if: runner.os == 'Windows' && (steps.yq-check-windows.outputs.found == 'false' || inputs.force == 'true')
-      shell: powershell
-      run: |
-        Write-Host "::group::Creating temp dir ${{ runner.temp }}\yq"
-        $_dir='${{ runner.temp }}\yq'
-        New-Item "${_dir}" -ItemType Directory -Force
-        Add-Content $Env:GITHUB_OUTPUT "yq-bin-dir=${_dir}"
-        Write-Host '::endgroup::'
-
     - name: 'Install yq - Windows-ish'
       if: runner.os == 'Windows' && (steps.yq-check-windows.outputs.found == 'false' || inputs.force == 'true')
       shell: powershell
       env:
         DL_COMPRESSED: "${{ inputs.download-compressed == 'true' }}"
         YQ_VERSION: '${{ inputs.version }}'
-        YQ_BIN_DIR: '${{ steps.prep-unix.outputs.yq-bin-dir }}'
       run: '& $Env:GITHUB_ACTION_PATH\scripts\windowsish.ps1'
-
-    - name: Install into tool cache
-      if: (inputs.force == 'true' || steps.yq-check-unix.outputs.found == 'false' || steps.yq-check-windows.outputs.found == 'false')
-      uses: AnimMouse/tool-cache@v1.0.5
-      with:
-        folder_name: yq

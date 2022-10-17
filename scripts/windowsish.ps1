@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 
 Write-Host "::group::Prep"
 
-$_base_url = "https://github.com/mikefarah/yq/releases/download"
+# validate input and prepare some vars
 
 switch ($Env:RUNNER_ARCH)
 {
@@ -20,41 +20,66 @@ switch ($Env:RUNNER_ARCH)
     }
 }
 
-$_dir_name = "yq_windows_${_arch}"
-$_bin_name = "${_dir_name}.exe"
+$_base_url = "https://github.com/mikefarah/yq/releases/download"
+
+$_root_name = "yq_windows_${_arch}"
+$_bin_name = "${_root_name}.exe"
 
 if ($Env:DL_COMPRESSED -eq "true")
 {
-    $_dl_name = "${_dir_name}.zip"
+    $_dl_name = "${_root_name}.zip"
     $_dl_path = "$Env:RUNNER_TEMP\${_dl_name}"
 }
 else
 {
     $_dl_name = "${_bin_name}"
-    $_dl_path = "$Env:RUNNER_TEMP\${_dir_name}\${_dl_name}"
-    New-Item "$Env:RUNNER_TEMP\${_dir_name}\" -ItemType Directory -Force
+    $_dl_path = "$Env:RUNNER_TEMP\${_root_name}\${_dl_name}"
+    Write-Host "Creating temporary directory $Env:RUNNER_TEMP\${_root_name}\"
+    New-Item "$Env:RUNNER_TEMP\${_root_name}\" -ItemType Directory -Force
 }
 
 $_dl_url = "${_base_url}/$Env:YQ_VERSION/${_dl_name}"
 
 Write-Host "::endgroup::"
 
+# download artifact
+
 Write-Host "::group::Downloading yq"
+
+Write-Host "Src: ${_dl_url}"
+Write-Host "Dst: ${_dl_path}"
 
 Invoke-WebRequest -Uri "${_dl_url}" -OutFile "${_dl_path}"
 
 Write-Host "::endgroup::"
 
+# expand archive, if necessary
+
 if ($Env:DL_COMPRESSED -eq "true")
 {
     Write-Host "::group::Expanding archive"
-    New-Item "$Env:RUNNER_TEMP\${_dir_name}" -ItemType Directory -Force
-    Expand-Archive -LiteralPath "${_dl_path}" -DestinationPath "$Env:RUNNER_TEMP\${_dir_name}"
+
+    Expand-Archive -LiteralPath "${_dl_path}" -DestinationPath "$Env:RUNNER_TEMP\${_root_name}"
+
+    Write-Host "Removing ${_dl_path}"
     Remove-Item -Force -Path "${_dl_path}"
+
     Write-Host "::endgroup::"
 }
 
-Write-Host "::group::Copying to temporary dir"
-Move-Item -Force -LiteralPath "$Env:RUNNER_TEMP\${_dir_name}\${_bin_name}" -Destination "$Env:YQ_BIN_DIR\yq.exe"
-Remove-Item -Force -Recurse -Path "$Env:RUNNER_TEMP\${_dir_name}"
+# install into tool cache
+
+Write-Host "::group::Copying to tool cache"
+
+Write-Host "Creating tool cache directory $Env:RUNNER_TOOL_CACHE\yq\"
+New-Item "$Env:RUNNER_TOOL_CACHE\yq\" -ItemType Directory -Force
+
+Write-Host "Installing into tool cache:"
+Write-Host "Src: $Env:RUNNER_TEMP\${_root_name}\${_bin_name}"
+Write-Host "Dst: $Env:RUNNER_TOOL_CACHE\yq\yq.exe"
+Move-Item -Force -LiteralPath "$Env:RUNNER_TEMP\${_root_name}\${_bin_name}" -Destination "$Env:RUNNER_TOOL_CACHE\yq\yq.exe"
+
+Write-Host "Removing $Env:RUNNER_TEMP\${_root_name}"
+Remove-Item -Force -Recurse -Path "$Env:RUNNER_TEMP\${_root_name}"
+
 Write-Host "::endgroup::"

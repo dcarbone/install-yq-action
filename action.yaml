@@ -82,7 +82,7 @@ runs:
       if: runner.os == 'Windows' && (steps.yq-check-windows.outputs.found == 'false' || inputs.force == 'true')
       shell: powershell
       run: |
-        Write-Host "::group::Creating temp dir ${{ runner.temp }}/yq"
+        Write-Host "::group::Creating temp dir ${{ runner.temp }}\yq"
         $_dir='${{ runner.temp }}\yq'
         New-Item "${_dir}" -ItemType Directory -Force
         Add-Content $Env:GITHUB_OUTPUT "yq-bin-dir=${_dir}"

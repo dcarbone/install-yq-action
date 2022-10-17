@@ -43,7 +43,7 @@ Write-Host "::group::Downloading yq"
 
 Invoke-WebRequest -Uri "${_dl_url}" -OutFile "${_dl_path}"
 
-Write-Host "::endgroup"
+Write-Host "::endgroup::"
 
 if ($Env:DL_COMPRESSED -eq "true")
 {

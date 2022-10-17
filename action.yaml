@@ -56,7 +56,7 @@ runs:
       shell: bash
       env:
         DL_COMPRESSED: "${{ inputs.download-compressed == 'true' }}"
-        YQ_VERSION: '${{ inputs.yq-version }}'
+        YQ_VERSION: '${{ inputs.version }}'
         YQ_BIN_DIR: '${{ steps.prep-unix.outputs.yq-bin-dir }}'
       run: $GITHUB_ACTION_PATH/scripts/unixish.sh
 

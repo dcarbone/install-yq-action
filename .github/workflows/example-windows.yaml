@@ -21,7 +21,7 @@ on:
 
 jobs:
   example:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: 'Setup yq'
         uses: dcarbone/setup-yq-action@main
@@ -32,5 +32,5 @@ jobs:
 
       - name: 'Check yq'
         run: |
-          which yq
-          yq --version
+          Get-Command "yq.exe"
+          yq.exe --version

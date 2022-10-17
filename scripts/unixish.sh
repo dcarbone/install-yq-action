@@ -59,7 +59,7 @@ if [[ $DL_COMPRESSED == 'true' ]]; then
   _dl_path="$RUNNER_TEMP/${_dl_name}"
 else
   _dl_name="${_bin_name}"
-  _dl_path="$RUNNER_TEMP"
+  _dl_path="$RUNNER_TEMP/${_dl_name}/${_dl_name}"
 fi
 
 _dl_url="${_base_url}/$YQ_VERSION/${_dl_name}"
@@ -75,14 +75,6 @@ if [[ $DL_COMPRESSED == 'true' ]]; then
   rm -rf "${_dl_path}"
   echo '::endgroup::'
 fi
-
-echo '::group::Moving to install dir'
-
-ls -lsa
-echo '-------'
-ls -lsa "$RUNNER_TEMP"
-echo '-------'
-ls -lsa "$RUNNER_TEMP/${_bin_name}"
 
 mv "$RUNNER_TEMP/${_bin_name}/${_bin_name}" "$YQ_BIN_DIR/yq"
 rm -rf "$RUNNER_TEMP/${_bin_name}"

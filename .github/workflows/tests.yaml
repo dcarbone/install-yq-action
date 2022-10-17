@@ -9,6 +9,7 @@ on:
     paths:
       - 'action.yaml'
       - '.github/workflows/tests.yaml'
+      - 'scripts/unixish.sh'
 
   pull_request:
     branches:

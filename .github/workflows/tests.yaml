@@ -51,7 +51,7 @@ jobs:
               _err=1
             fi
           else
-            if [[ '${{ steps.setup-yq.outputs.found' == 'true' ]]; then
+            if [[ '${{ steps.setup-yq.outputs.found }}' == 'true' ]]; then
               if [[ '${{ steps.setup-yq.outputs.installed }}' != 'false' ]]; then
                 echo 'Unexpected value for "installed":'
                 echo 'Expected:   "false"'

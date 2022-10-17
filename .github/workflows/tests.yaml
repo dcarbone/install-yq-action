@@ -90,7 +90,10 @@ jobs:
       - name: Check yq - Windows-ish
         if: runner.os == 'Windows'
         run: |
-          Get-ChildItem "$Env:RUNNER_TOOL_CACHE"
+          Get-ChildItem "${{ runner.tool_cache }}"
+          Write-Host "------"
+          Get-ChildItem "${{ runner.tool_cache }}\yq"
+          Write-Host "------"
           
           Get-Command "yq.exe"
           yq.exe --version

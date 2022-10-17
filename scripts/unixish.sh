@@ -69,7 +69,7 @@ echo '::endgroup::'
 
 if [[ $DL_COMPRESSED == 'true' ]]; then
   echo '::group::Expanding archive'
-  tar -xzvf "${_dl_path}"
+  tar -xzvf "${_dl_path}" -C "$RUNNER_TEMP"
   rm -rf "${_dl_path}"
   echo '::endgroup::'
 fi

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-echo '::group::Downloading yq'
-
 set -e
+
+echo '::group::Prep'
 
 _base_url='https://github.com/mikefarah/yq/releases/download'
 
@@ -62,7 +62,13 @@ else
   _dl_path="$RUNNER_TEMP/${_dl_name}/${_dl_name}"
 fi
 
+mkdir -p "${_dl_path}"
+
 _dl_url="${_base_url}/$YQ_VERSION/${_dl_name}"
+
+echo '::endgroup::'
+
+echo '::group::Downloading yq'
 
 wget -O- "${_dl_url}" > "${_dl_path}"
 

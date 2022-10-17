@@ -91,9 +91,9 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           Write-Host $Env:RUNNER_TOOL_CACHE
-          Write-Host (Get-ChildItem "$Env:RUNNER_TOOL_CACHE")
-          Write-Host (Get-ChildItem "$Env:RUNNER_TOOL_CACHE\yq")
-          Write-Host (Get-Command "yq")
+          Get-ChildItem "$Env:RUNNER_TOOL_CACHE"
+          Get-ChildItem "$Env:RUNNER_TOOL_CACHE\yq"
+          Get-Command "yq"
           yq --version
 
       - name: Check Outputs - Windows-ish

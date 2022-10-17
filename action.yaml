@@ -95,7 +95,7 @@ runs:
         DL_COMPRESSED: "${{ inputs.download-compressed == 'true' }}"
         YQ_VERSION: '${{ inputs.version }}'
         YQ_BIN_DIR: '${{ steps.prep-unix.outputs.yq-bin-dir }}'
-      run: $GITHUB_ACTION_PATH/scripts/windowsish.ps1
+      run: '& $Env:GITHUB_ACTION_PATH\scripts\windowsish.ps1'
 
     - name: Install into tool cache
       if: (inputs.force == 'true' || steps.yq-check-unix.outputs.found == 'false' || steps.yq-check-windows.outputs.found == 'false')

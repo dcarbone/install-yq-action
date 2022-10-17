@@ -3,8 +3,6 @@ Install YQ into the action tool without needing nodejs
 
 [![Tests - Setup YQ Action](https://github.com/dcarbone/setup-yq-action/actions/workflows/tests.yaml/badge.svg)](https://github.com/dcarbone/setup-yq-action/actions/workflows/tests.yaml)
 
-Currently this action only supports Linux and MacOS.
-
 # Index
 
 1. [Examples](#examples)

@@ -1,0 +1,33 @@
+name: 'Tests - Setup YQ Action'
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - 'action.yaml'
+      - '.github/workflows/tests.yaml'
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-linux:
+    strategy:
+      matrix:
+        image: ["ubuntu-latest", "macos-latest"]
+    name: "Test Action - ${{ matrix.image }}"
+    runs-on: ${{ matrix.image }}
+    steps:
+      - uses: actions/checkout@v3.1.0
+
+      - name: Setup yq
+        uses: dcarbone/setup-yq-action@main
+
+      - name: Check yq
+        run: |
+          which yq
+          yq --version

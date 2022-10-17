@@ -10,6 +10,7 @@ on:
       - 'action.yaml'
       - '.github/workflows/tests.yaml'
       - 'scripts/unixish.sh'
+      - 'scripts/windowsish.ps1'
 
   pull_request:
     branches:

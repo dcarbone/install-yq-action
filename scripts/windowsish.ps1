@@ -25,6 +25,9 @@ $_base_url = "https://github.com/mikefarah/yq/releases/download"
 $_root_name = "yq_windows_${_arch}"
 $_bin_name = "${_root_name}.exe"
 
+Write-Host "Creating temporary directory $Env:RUNNER_TEMP\${_root_name}\"
+New-Item "$Env:RUNNER_TEMP\${_root_name}\" -ItemType Directory -Force
+
 if ($Env:DL_COMPRESSED -eq "true")
 {
     $_dl_name = "${_root_name}.zip"
@@ -59,7 +62,7 @@ if ($Env:DL_COMPRESSED -eq "true")
 {
     Write-Host "::group::Expanding archive"
 
-    Expand-Archive -LiteralPath "${_dl_path}" -DestinationPath "$Env:RUNNER_TEMP\${_root_name}"
+    Expand-Archive -LiteralPath "${_dl_path}" -DestinationPath "$Env:RUNNER_TEMP\${_root_name}\"
 
     Write-Host "Removing ${_dl_path}"
     Remove-Item -Force -Path "${_dl_path}"

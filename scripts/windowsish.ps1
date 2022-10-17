@@ -82,4 +82,7 @@ Move-Item -Force -LiteralPath "$Env:RUNNER_TEMP\${_root_name}\${_bin_name}" -Des
 Write-Host "Removing $Env:RUNNER_TEMP\${_root_name}"
 Remove-Item -Force -Recurse -Path "$Env:RUNNER_TEMP\${_root_name}"
 
+Write-Host "Adding $Env:RUNNER_TOOL_CACHE\yq\ to path..."
+Add-Content "$Env:GITHUB_PATH" "$Env:RUNNER_TOOL_CACHE\yq\"
+
 Write-Host "::endgroup::"

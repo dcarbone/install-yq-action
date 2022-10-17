@@ -19,9 +19,19 @@ jobs:
   test-linux:
     strategy:
       matrix:
-        image: [ "ubuntu-latest", "macos-latest" ]
-        download-compressed: [ 'true', 'false' ]
-        force: [ 'true', 'false' ]
+        image:
+          - "ubuntu-latest"
+          - "macos-latest"
+          - "ubuntu-20.04"
+          - "ubuntu-22.04"
+          - "macos-11"
+          - "macos-12"
+        download-compressed:
+          - 'true'
+          - 'false'
+        force:
+          - 'true'
+          - 'false'
     name: "Test Action - (img: ${{ matrix.image }}; dlcmp: ${{ matrix.download-compressed }}; force: ${{ matrix.force }})"
     runs-on: ${{ matrix.image }}
     steps:

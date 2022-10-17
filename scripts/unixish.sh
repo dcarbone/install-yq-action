@@ -4,7 +4,7 @@ echo '::group::Downloading yq'
 
 set -e
 
-_base_url='https://github.com/mikefarah/yq/releases/download/'
+_base_url='https://github.com/mikefarah/yq/releases/download'
 
 _os=
 _arch=
@@ -65,14 +65,16 @@ _dl_url="${_base_url}/$YQ_VERSION/${_dl_name}"
 
 wget -O- "${_dl_url}" > "${_dl_path}"
 
+echo '::endgroup::'
+
 if [[ $DL_COMPRESSED == 'true' ]]; then
+  echo '::group::Expanding archive'
   tar -xzvf "${_dl_path}"
-  mv "$RUNNER_TEMP/${_bin_name}/${_bin_name}" "$YQ_BIN_DIR/yq"
-  rm -rf "$RUNNER_TEMP/${_bin_name}"
   rm -rf "${_dl_path}"
-else
-  mv "$RUNNER_TEMP/${_bin_name}" "$YQ_BIN_DIR/yq"
-  rm -rf "$RUNNER_TEMP/${_bin_name}"
+  echo '::endgroup::'
 fi
 
+echo '::group::Moving to install dir'
+mv "$RUNNER_TEMP/${_bin_name}/${_bin_name}" "$YQ_BIN_DIR/yq"
+rm -rf "$RUNNER_TEMP/${_bin_name}"
 echo '::endgroup::'

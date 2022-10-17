@@ -26,6 +26,8 @@ jobs:
 
       - name: Setup yq
         uses: dcarbone/setup-yq-action@main
+        with:
+          force: true
 
       - name: Check yq
         run: |

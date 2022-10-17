@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Setup yq'
-        uses: dcarbone/install-yq@@v1.0.0
+        uses: dcarbone/install-yq@v1.0.0
         with:
           version: '${{ inputs.version }}'
           download-compressed: '${{ inputs.download-compressed }}'

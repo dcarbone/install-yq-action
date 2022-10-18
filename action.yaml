@@ -43,24 +43,12 @@ runs:
           echo "found=false" >> $GITHUB_OUTPUT
         fi
 
-    - name: 'Prep - Unix-ish'
-      id: prep-unix
-      if: (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check-unix.outputs.found == 'false' || inputs.force == 'true')
-      shell: bash
-      run: |
-        echo '::group::Creating temp dir ${{ runner.temp }}/yq'
-        _dir='${{ runner.temp }}/yq'
-        mkdir -p "${_dir}"
-        echo "yq-bin-dir=${_dir}" >> $GITHUB_OUTPUT
-        echo '::endgroup::'
-
     - name: 'Install yq - Unix-ish'
       if: (runner.os == 'Linux' || runner.os == 'macOS') && (steps.yq-check-unix.outputs.found == 'false' || inputs.force == 'true')
       shell: bash
       env:
         DL_COMPRESSED: "${{ inputs.download-compressed == 'true' }}"
         YQ_VERSION: '${{ inputs.version }}'
-        YQ_BIN_DIR: '${{ steps.prep-unix.outputs.yq-bin-dir }}'
       run: $GITHUB_ACTION_PATH/scripts/unixish.sh
 
     - name: 'Check for yq - Windows-ish'

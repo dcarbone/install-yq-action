@@ -7,7 +7,7 @@ on:
         type: string
         required: false
         description: "Version of YQ to install"
-        default: "v4.28.1"
+        default: "v4.30.6"
       download-compressed:
         type: boolean
         required: false
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Setup yq'
-        uses: dcarbone/install-yq-action@v1.0.1
+        uses: dcarbone/install-yq-action@v1.1.0
         with:
           version: '${{ inputs.version }}'
           download-compressed: '${{ inputs.download-compressed }}'

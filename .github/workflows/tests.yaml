@@ -57,7 +57,7 @@ jobs:
       - name: Check Outputs - Unix-ish
         if: runner.os == 'Linux' || runner.os == 'macOS'
         shell: bash -e {0}
-        // language=sh
+        # language=sh
         run: |
           _installed='${{ steps.install-yq.outputs.installed }}'
           _err=
@@ -100,7 +100,7 @@ jobs:
       - name: Check Outputs - Windows-ish
         if: runner.os == 'Windows'
         shell: powershell
-        // language=pwsh
+        # language=pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           Set-StrictMode -Version Latest

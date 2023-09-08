@@ -23,7 +23,7 @@ Cross-platform [yq](https://github.com/mikefarah/yq) installer composite action
   version:
     required: false
     description: "Version of YQ to install"
-    default: "v4.30.6"
+    default: "v4.35.1"
 ```
 
 This must be a version with a [corresponding release](https://github.com/mikefarah/yq/releases).

@@ -7,7 +7,7 @@ on:
         type: string
         required: false
         description: "Version of YQ to install"
-        default: "v4.30.6"
+        default: "v4.35.1"
       download-compressed:
         type: boolean
         required: false

@@ -10,7 +10,7 @@ inputs:
   version:
     required: false
     description: "Version of YQ to install"
-    default: "v4.35.1"
+    default: "v4.44.3"
   download-compressed:
     required: false
     description: "If 'true', downloads .tar.gz of binary rather than raw binary.  Save the tubes."

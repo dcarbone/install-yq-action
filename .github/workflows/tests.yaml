@@ -38,7 +38,11 @@ jobs:
         force:
           - 'true'
           - 'false'
-    name: "Test Action - (img: ${{ matrix.image }}; dlcmp: ${{ matrix.download-compressed }}; force: ${{ matrix.force }})"
+        version:
+          - ''
+          - 'v4.44.3'
+
+    name: "Test Action - (img: ${{ matrix.image }}; dlcmp: ${{ matrix.download-compressed }}; force: ${{ matrix.force }}; v: ${{ matrix.version }})"
     runs-on: ${{ matrix.image }}
     steps:
       - uses: actions/checkout@v4
@@ -49,6 +53,7 @@ jobs:
         with:
           force: '${{ matrix.force }}'
           download-compressed: '${{ matrix.download-compressed }}'
+          version: '${{ matrix.version }}'
 
       - name: Check yq - Unix-ish
         if: runner.os == 'Linux' || runner.os == 'macOS'

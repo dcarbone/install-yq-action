@@ -8,7 +8,7 @@ branding:
 
 inputs:
   version:
-    required: false
+    required: true
     description: "Version of YQ to install"
     default: "v4.44.3"
   download-compressed:
@@ -35,6 +35,7 @@ runs:
       id: yq-check-unix
       if: (runner.os == 'Linux' || runner.os == 'macOS')
       shell: bash +e {0}
+      # language=bash
       run: |
         _yq_bin="$(which yq)"
         if [ -f "${_yq_bin}" ]; then
@@ -55,6 +56,7 @@ runs:
       id: yq-check-windows
       if: runner.os == 'Windows'
       shell: powershell
+      # language=powershell
       run: |
         if (Get-Command "yq.exe" -ErrorAction SilentlyContinue)
         {

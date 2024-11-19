@@ -7,7 +7,6 @@ on:
         type: string
         required: false
         description: "Version of YQ to install"
-        default: "v4.35.1"
       download-compressed:
         type: boolean
         required: false
@@ -31,6 +30,7 @@ jobs:
           force: '${{ inputs.force }}'
 
       - name: 'Check yq'
+        # language=powershell
         run: |
           Get-Command "yq.exe"
           yq.exe --version

@@ -23,7 +23,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: 'Setup yq'
-        uses: dcarbone/install-yq-action@v1.3.0
+        uses: dcarbone/install-yq-action@v1
         with:
           version: '${{ inputs.version }}'
           download-compressed: '${{ inputs.download-compressed }}'

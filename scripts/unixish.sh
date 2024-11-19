@@ -66,13 +66,17 @@ else
 fi
 
 # default to _something_...
-_version="${YQ_VERSION:-'v4.44.3'}"
+_version="${YQ_VERSION}"
+
+if [ -z "${YQ_VERSION}" ]; then
+  _version='v4.44.3'
+fi
 
 _dl_url="${_base_url}/${_version}/${_dl_name}"
 
 echo '::endgroup::'
 
-echo '::group::Downloading yq'
+echo "::group::Downloading yq ${_version}"
 
 echo "Src: ${_dl_url}"
 echo "Dst: ${_dl_path}"

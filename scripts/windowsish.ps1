@@ -46,7 +46,7 @@ $_version = "$Env:YQ_VERSION"
 # default to _something_...
 if ($_version -eq "")
 {
-    $_version = = "v4.44.3"
+    $_version = "v4.44.3"
 }
 
 $_dl_url = "${_base_url}/${_version}/${_dl_name}"
@@ -55,7 +55,7 @@ Write-Host "::endgroup::"
 
 # download artifact
 
-Write-Host "::group::Downloading yq"
+Write-Host "::group::Downloading yq ${_version}"
 
 Write-Host "Src: ${_dl_url}"
 Write-Host "Dst: ${_dl_path}"

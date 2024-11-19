@@ -65,7 +65,10 @@ else
   _dl_path="$RUNNER_TEMP/${_root_name}/${_dl_name}"
 fi
 
-_dl_url="${_base_url}/$YQ_VERSION/${_dl_name}"
+# default to _something_...
+_version="${YQ_VERSION:-'v4.44.3'}"
+
+_dl_url="${_base_url}/${_version}/${_dl_name}"
 
 echo '::endgroup::'
 

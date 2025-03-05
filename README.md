@@ -1,7 +1,7 @@
 # install-yq-action
 Cross-platform [yq](https://github.com/mikefarah/yq) installer composite action
 
-[![Tests - Setup YQ Action](https://github.com/dcarbone/install-yq-action/actions/workflows/tests.yaml/badge.svg)](https://github.com/dcarbone/install-yq-action/actions/workflows/tests.yaml)
+[![Tests - Install YQ Action](https://github.com/dcarbone/install-yq-action/actions/workflows/tests.yaml/badge.svg)](https://github.com/dcarbone/install-yq-action/actions/workflows/tests.yaml)
 
 # Index
 

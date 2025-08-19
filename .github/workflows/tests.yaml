@@ -47,7 +47,7 @@ jobs:
     name: "Test Action - (img: ${{ matrix.image }}; dlcmp: ${{ matrix.download-compressed }}; force: ${{ matrix.force }}; v: ${{ matrix.version }})"
     runs-on: ${{ matrix.image }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup yq
         id: install-yq

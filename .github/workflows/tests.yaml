@@ -34,7 +34,6 @@ jobs:
           - "macos-15"
           - "windows-latest"
           - "windows-2022"
-          - "windows-2019"
         download-compressed:
           - 'true'
           - 'false'

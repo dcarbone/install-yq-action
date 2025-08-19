@@ -16,13 +16,16 @@ on:
     branches:
       - main
 
+concurrency:
+  group: '${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: true
+
 jobs:
   test-linux:
     strategy:
       matrix:
         image:
           - "ubuntu-latest"
-          - "ubuntu-20.04"
           - "ubuntu-22.04"
           - "ubuntu-24.04"
           - "macos-latest"
@@ -31,7 +34,6 @@ jobs:
           - "macos-15"
           - "windows-latest"
           - "windows-2022"
-          - "windows-2019"
         download-compressed:
           - 'true'
           - 'false'

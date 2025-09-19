@@ -18,6 +18,23 @@ on:
         description: "Do not check for existing yq installation before continuing."
         default: false
 
+# you may need to change this block for your purposes.
+permissions:
+  actions: none
+  attestations: none
+  checks: none
+  contents: none
+  deployments: none
+  id-token: none
+  issues: none
+  models: none
+  discussions: none
+  packages: none
+  pages: none
+  pull-requests: none
+  security-events: none
+  statuses: none
+
 jobs:
   example:
     runs-on: ubuntu-latest
